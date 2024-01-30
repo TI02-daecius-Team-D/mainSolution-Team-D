@@ -17,7 +17,8 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                     #find the max increase in list.
             output_file.write("[CASH SURPLUS] CASH ON EACH DAY IS HIHGER THAN THE PREVIOUS DAY\n")
             output_file.write(f"[HIGHEST CASH USRPLUS] DAY: {data_list[i][0]}, AMOUNT: SGD{max_increase}\n")
-        elif sorted(value_list, reverse=True) == value_list
+        elif sorted(value_list, reverse=True) == value_list:
+                #to check if the values within the value list is sorted in a descending order
                 max_decrease_index = None
                 max_decrease = None
                 for i in range(1, len(value_list)):
@@ -29,6 +30,6 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                           max_decrease_index = i
                 output_file.write("[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n")
                 output_file.write(f"[HIGHEST CASH DEFICIT] DAY: {data_list[max_decrease_index][0]}, AMPUNT: SGD {abs(max_decrease)}\n")
-                
+
                                   
 
