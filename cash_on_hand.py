@@ -13,3 +13,5 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                 if max_increase is None or increase > max_increase:
                     max_increase = increase
                     #find the max increase in list.
+
+            output_file.write("[CASH SURPLUS] CASHH ON EACH DAY IS HIHGER THAN THE PREVIOUSDAY\n")
