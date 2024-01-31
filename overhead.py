@@ -1,23 +1,23 @@
-def get_second_element(item):
+def get_second_element(item): #to get the second element (which is overhead)
     return item [1]
 def find_highest_overhead(
-    file: str,
+    file_name: str,
     output_file_path: str,
-#to indicate where it should write its results    
+#to indicate where it should reas and write for output  
 ):
-    extracted_data =  []
-    with open (".csv_reports/overheads-day-90.csv", "r") as file:
+    extracted_data =  [] #store items into list (in this case its the overhead)
+    with open (file_name, "r") as file: #r = read. 
         next (file)
         for line in file:
-             line_parts = line.split(",") 
-        parts = [] 
-        for part in line_parts: 
-                parts.append(part.strip()) 
-        category, overhead = parts[0][1:-1], float(parts[1])
-        extracted_data.append([category, overhead])
-    max_cat, max_float_value = max(extracted_data, key = get_second_element)
-    result = (f"[HIGHEST OVERHEAD] {max_cat}: {max_float_value}")
-    with open(output_file_path, 'w') as output_file:
-        output_file.write(str(result))
+             line_parts = line.split(",") #split data into 2 parts (split cat and overhead)
+             parts = [] 
+             for part in line_parts: 
+                     parts.append(part.strip()) #format the data from csv file so easier to extract highest overhead value in cat 
+             category, overhead = parts[0][1:-1], float(parts[1])
+             extracted_data.append([category, overhead])
+        max_cat, max_float_value = max(extracted_data, key = get_second_element) #max is to take out the different cat's max value
+        result = (f"[HIGHEST OVERHEAD] {max_cat}: {max_float_value}")
+        with open(output_file_path, 'w') as output_file: #use "W" to write instead of "a" so we will not regenerate the same thing
+             output_file.write(str(result))
                            
 

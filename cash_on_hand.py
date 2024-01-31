@@ -10,13 +10,14 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
     value_list = [int(parts[1]) for parts in data_list]
     #read from file into the list.
     
-    with open(output_file_path, "a") as output_file:
-        if sorted(value_list, reverse=False) == value_list:
+    #
+    with open(output_file_path, "a") as output_file: #append as we do not want to erase data overhead from txt file (sort of to add on)
+        if sorted(value_list, reverse=False) == value_list: #sort list in asending order
             max_increase = None
-            for i in range(1, len(value_list)):
+            for i in range(1, len(value_list)): # [i] is used to go thru every item in the list ()
                 increase = value_list[i] - value_list[i - 1]
                 # [i] is to find the differnece in value inbetween the values within the list
-                if max_increase is None or increase > max_increase:
+                if max_increase is None or increase > max_increase: #to get the max increase value
                     max_increase = increase
                     #find the max increase in list.
             output_file.write("[CASH SURPLUS] CASH ON EACH DAY IS HIHGER THAN THE PREVIOUS DAY\n")
@@ -27,10 +28,9 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                 max_decrease = None
                 # none is used as a variable to define
                 for i in range(1, len(value_list)):
-                     decrease = value_list[i] - value_list[i - 1]
-                     #This line calculates the difference between the current and previous cash surplus values.
-                     if max_decrease is None or decrease < max_decrease:
-                     #check if previous max or current max is smaller
+                     decrease = value_list[i] - value_list[i - 1] #to go thru every item in the list
+                     if max_decrease is None or decrease < max_decrease: #check if previous max or current max is smaller
+                     
                           max_decrease = decrease
                           max_decrease_index = i
                 output_file.write("[CASH DEFICIT] CASH ON EACH DAY IS LOWER THAN THE PREVIOUS DAY\n")
@@ -48,7 +48,7 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                             decrease_list.append(decrease) #add all decrease values into this list)
                             deficit_days.add(data_list[i][0]) #to get the number of day whr decreased happened
                             deficit_data.append((data_list[i][0], decrease)) #appending the day corresponding deficit values into list
-             top_3_deficits = sorted(deficit_data, key=get_second_element)[:3]
+             top_3_deficits = sorted(deficit_data, key=get_second_element)[:3] # [:3] used to get top 3 deficit
              highest_str = ["HIGHEST CASH DEFICT" , "2ND HIGHEST CASH DEFICIT", "3RD HIGHEST CASH DEFICIT"]
              count = 0
 
