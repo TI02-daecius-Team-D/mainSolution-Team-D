@@ -1,15 +1,16 @@
-def write_to_txt(output_file_path: str, result: str):
-    with open(output_file_path, 'w') as output_file:
-        output_file.write(str(result))
-#converting it to string 
 
+def get_second_element(item):
+    return item [1]
 def profit_loss_insights(
         file_name: str,
         output_file_path:str,
 ):
     with open(file_name, 'r') as file:
+        data_list = []
         next (file)
-        data_list = [line.strip().split(',') for line in file ]
+        for line in file:
+            data = line.strip().split(",")
+            data_list.append(data)
     value_list = [int (parts[4]) for parts in data_list]
     with open (output_file_path, "a") as output_file:
         if sorted(value_list, reverse= False) == value_list:
