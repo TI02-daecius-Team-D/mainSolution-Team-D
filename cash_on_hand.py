@@ -51,7 +51,11 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
 
              for day, amount in deficit_data:
                   output_file.write(f"\n[{highest_str[count]}]) DAY: {day} , {day}, AMOUNT: SGD{abs(amount)}")
-                #output
+             for day, amount in top_3_deficits:
+                  output_file.write(f"\n[{highest_str[count]}] DAY: {day}, AMOUNT: SGD{abs(amount)}")
+                  count += 1
+                
+              
 
 
 
