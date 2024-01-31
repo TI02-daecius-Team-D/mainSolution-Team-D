@@ -24,6 +24,39 @@ def profit_loss_insights(
                 output_file.write (f"[HIGHEST NET PROFIT SURPLUS] DAY: {data_list[i][0]}, Amount: SGD{max_increase}\n")
         #analyze net profit data and keeps track of the highest increase in net profit 
         #contains information about the net profit surplus to an output file, including the day with the highest surplus and the corresponding amount
+        elif sorted(value_list, reverse = True) == value_list:
+            max_decrease_index = None
+            max_decrease = None
+            for i in range(1, len(value_list)):
+                decrease = value_list[i] - value_list [i - 1]
+                if max_decrease is None or decrease < max_decrease:
+                    max_decrease = decrease
+                    max_decrease_index = i
+                output_file.write("[NET PROFIT DEFICIT] NET PROFIT ON EACH DAY IS LOWER THAN PREVIOUS DAY\n")
+        else:
+
+            decrease = None
+            max_decrease = None
+            decrease_list = []
+            deficit_data = []
+            deficit_days = set()
+            for i in range(1, len(value_list)):
+                decrease = value_list[i]-value_list[i-1]
+                if max_decrease is None or decrease < max_decrease:
+                    if decrease < 0:
+                        decrease_list.append(decrease)
+                        deficit_days.add(data_list[i][0])
+                        deficit_data.append((data_list[i][0], decrease))
+                top_3_deficits = sorted(deficit_data, key=get_second_element)[:3]
+                highest_str = ["HIGHEST NET PROFIT DEFICIT", "2ND HIGHEST NET PROFIT DEFICIT", "3RD HIGHEST NET PROFIT DEFICIT"]
+                count = 0
+                for day, amount in deficit_data:
+                    output_file.write(f"[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{abs(amount)}\n")
+                for day, amount in top_3_deficits:
+                    output_file.write(f"[{highest_str[count]}]  DAY: {day}, AMOUNT: SGD{abs(amount)}\n")
+                    count += 1
+                        
+
         
 
 
