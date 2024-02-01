@@ -48,14 +48,14 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                             decrease_list.append(decrease) #add all decrease values into this list)
                             deficit_days.add(data_list[i][0]) #to get the number of day whr decreased happened
                             deficit_data.append((data_list[i][0], decrease)) #appending the day corresponding deficit values into list
-             top_3_deficits = sorted(deficit_data, key=get_second_element)[:3] # [:3] used to get top 3 deficit
+             top_3_deficits = sorted(deficit_data)[:3] # [:3] used to get top 3 deficit # change tofollow to sort, sort without the key will work where
              highest_str = ["HIGHEST CASH DEFICT" , "2ND HIGHEST CASH DEFICIT", "3RD HIGHEST CASH DEFICIT"]
              count = 0
 
              for day, amount in deficit_data:
-                  output_file.write(f"\n[{highest_str[count]}]) DAY: {day} , {day}, AMOUNT: SGD{abs(amount)}")
+                  output_file.write(f"\n[CASH DEFICIT] DAY: {day} AMOUNT: SGD{abs(amount)}")
              for day, amount in top_3_deficits:
-                  output_file.write(f"\n[{highest_str[count]}] DAY: {day}, AMOUNT: SGD{abs(amount)}")
+                  output_file.write(f"\n[{highest_str[count]}] DAY: {day} AMOUNT: SGD{abs(amount)}")
                   count += 1
                 
               
