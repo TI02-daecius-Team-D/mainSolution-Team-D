@@ -16,6 +16,7 @@ def find_highest_overhead(
              category, overhead = parts[0][1:-1], float(parts[1])
              extracted_data.append([category, overhead])
         max_cat, max_float_value = max(extracted_data) #max is to take out the different cat's max value
+        #write in the summary report txt
         result = (f"[HIGHEST OVERHEAD] {max_cat}: {max_float_value}")
         with open(output_file_path, 'w') as output_file: #use "W" to write instead of "a" so we will not regenerate the same thing
              output_file.write(str(result))

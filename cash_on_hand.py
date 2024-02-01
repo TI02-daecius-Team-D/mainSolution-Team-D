@@ -7,12 +7,12 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
         for line in file:
             data = line.strip().split(",")
             data_list.append(data)
-    value_list = [int(parts[1]) for parts in data_list]
+    value_list = [int(parts[1]) for parts in data_list] 
+    #creating a new list called 'value_list' that contains the second element of each sublist in 'data_list'
     #read from file into the list.
-    
-    #
+
     with open(output_file_path, "a") as output_file: #append as we do not want to erase data overhead from txt file (sort of to add on)
-        if sorted(value_list, reverse=False) == value_list: #sort list in asending order
+        if sorted(value_list, reverse=False) == value_list: #reverse=false - sort list in asending order
             max_increase = None
             for i in range(1, len(value_list)): # [i] is used to go thru every item in the list ()
                 increase = value_list[i] - value_list[i - 1]
@@ -47,16 +47,21 @@ def cash_on_hand_insights(file_name: str, output_file_path: str):
                        if decrease < 0:
                             decrease_list.append(decrease) #add all decrease values into this list)
                             deficit_days.add(data_list[i][0]) #to get the number of day whr decreased happened
-                            deficit_data.append((data_list[i][0], decrease)) #appending the day corresponding deficit values into list
-             top_3_deficits = sorted(deficit_data)[:3] # [:3] used to get top 3 deficit # change tofollow to sort, sort without the key will work where
+                            deficit_data.append((decrease, data_list[i][0])) #appending the day corresponding deficit values into list
+             top_3_deficits = sorted(deficit_data, reverse = False)[:3]
+             print(top_3_deficits) # [:3] used to get top 3 deficit 
+
+             #write in the summary report txt
              highest_str = ["HIGHEST CASH DEFICT" , "2ND HIGHEST CASH DEFICIT", "3RD HIGHEST CASH DEFICIT"]
              count = 0
 
-             for day, amount in deficit_data:
+# i changed and placed amount infront of day so that the code will retrieve the second row of data from the csv which are numbers, followed by the day.
+             for amount, day in deficit_data:
                   output_file.write(f"\n[CASH DEFICIT] DAY: {day} AMOUNT: SGD{abs(amount)}")
-             for day, amount in top_3_deficits:
-                  output_file.write(f"\n[{highest_str[count]}] DAY: {day} AMOUNT: SGD{abs(amount)}")
-                  count += 1
+             for amount, day in top_3_deficits:
+                  #count is used to keep track of the current index in the top_3_deficits list. 
+                  output_file.write(f"\n[{highest_str[count]}] DAY: {day} AMOUNT: SGD{abs(amount)}") #abs is to make sure the value is positive
+                  count += 1 #used in a loop to keep track of the number of iterations
                 
               
 

@@ -46,13 +46,14 @@ def profit_loss_insights(
                     if decrease < 0:
                         decrease_list.append(decrease)
                         deficit_days.add(data_list[i][0])
-                        deficit_data.append((data_list[i][0], decrease))
-            top_3_deficits = sorted(deficit_data)[:3]
+                        deficit_data.append((decrease, data_list[i][0]))
+            top_3_deficits = sorted(deficit_data, reverse = False)[:3]
+            #write in the summary report txt
             highest_str = ["HIGHEST NET PROFIT DEFICIT", "2ND HIGHEST NET PROFIT DEFICIT", "3RD HIGHEST NET PROFIT DEFICIT"]
             count = 0
-            for day, amount in deficit_data:
-                output_file.write(f"\n[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{abs(amount)}")
-            for day, amount in top_3_deficits:
+            for amount, day in deficit_data:
+                output_file.write(f"\n[NET PROFIT DEFICIT] DAY: {day}, AMOUNT: SGD{abs(amount)}") #abs used to make sure the value has a positive output
+            for amount, day in top_3_deficits:
                 output_file.write(f"\n[{highest_str[count]}]  DAY: {day}, AMOUNT: SGD{abs(amount)}")
                 count += 1
                         
