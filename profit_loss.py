@@ -1,6 +1,4 @@
 
-def get_second_element(item):
-    return item [1]
 def profit_loss_insights(
         file_name: str,
         output_file_path:str,

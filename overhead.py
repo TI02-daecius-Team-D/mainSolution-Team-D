@@ -1,5 +1,4 @@
-def get_second_element(item): #to get the second element (which is overhead)
-    return item [1]
+
 def find_highest_overhead(
     file_name: str,
     output_file_path: str,

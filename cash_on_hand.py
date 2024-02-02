@@ -1,5 +1,4 @@
-def get_second_element (item):
-    return item [1]
+
 def cash_on_hand_insights(file_name: str, output_file_path: str):
     data_list = [] 
     with open(file_name, "r") as file:
